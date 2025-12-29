@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { supabase } from "../lib/supbase.ts";
 import type { User } from "@supabase/supabase-js";
 
@@ -10,17 +10,17 @@ export default function Auth() {
   const [loading, setLoading] = useState(true);
 
   // get existing session on load
-  useEffect(() => {
-    supabase.auth.getUser().then(({ data }) => {
-      console.log(data);
-      setUser(data.user);
-      setLoading(false);
-    });
+  // useEffect(() => {
+  //   supabase.auth.getUser().then(({ data }) => {
+  //     console.log(data);
+  //     setUser(data.user);
+  //     setLoading(false);
+  //   });
 
-    supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user ?? null);
-    });
-  }, []);
+  //   supabase.auth.onAuthStateChange((_event, session) => {
+  //     setUser(session?.user ?? null);
+  //   });
+  // }, []); //we made useAuth hook for this
 
   const handleLogin = async () => {
     setError("");
