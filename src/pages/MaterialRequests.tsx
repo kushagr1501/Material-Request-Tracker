@@ -1,6 +1,6 @@
 import { useMaterialRequests } from "@/hooks/useMaterialRequests";
 import type { MaterialRequest } from "@/types/material-request";
-
+import { useState } from "react";
 import {
   Table,
   TableBody,
@@ -43,6 +43,7 @@ function PriorityBadge({ priority }: { priority: string }) {
 
 export default function MaterialRequests() {
   const { data, isLoading, error } = useMaterialRequests();
+  const [SearchQuery, setSearchQuery] = useState("");
 
   if (isLoading) {
     return <div className="p-6">Loading material requests...</div>;
@@ -56,30 +57,45 @@ export default function MaterialRequests() {
     return <div className="p-6">No material requests yet.</div>;
   }
 
+ const filteredData=(data as MaterialRequest[]).filter((req)=>
+  req.material_name.toLowerCase().includes(SearchQuery.toLowerCase())
+)
   return (
     <div className="p-6">
-      <h1 className="text-xl font-semibold mb-4">Material Requests</h1>
+      <h1 className="text-2xl font-semibold mb-4 ">Material Requests</h1>
 
-      <Table>
-        <TableHeader>
+      <input
+        type="text"
+        placeholder="Search material requests..."
+        className="mb-4 p-2 border rounded w-full"
+        value={SearchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+      />
+
+      <Table className="border rounded-lg overflow-hidden">
+        <TableHeader className="bg-muted">
           <TableRow>
-            <TableHead>Material</TableHead>
-            <TableHead>Quantity</TableHead>
-            <TableHead>Unit</TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead>Priority</TableHead>
-            <TableHead>Date</TableHead>
+            <TableHead className="font-semibold">Material</TableHead>
+            <TableHead className="font-semibold text-right">Quantity</TableHead>
+            <TableHead className="font-semibold">Unit</TableHead>
+            <TableHead className="font-semibold">Status</TableHead>
+            <TableHead className="font-semibold">Priority</TableHead>
+            <TableHead className="font-semibold">Date</TableHead>
           </TableRow>
         </TableHeader>
 
         <TableBody>
-          {(data as MaterialRequest[]).map((req) => (
-            <TableRow key={req.id}>
-              <TableCell className="font-medium">
-                {req.material_name}
-              </TableCell>
+          {(filteredData as MaterialRequest[]).map((req, index) => (
+            <TableRow
+              key={req.id}
+              className={`
+          ${index % 2 === 0 ? "bg-background" : "bg-muted/40"}
+          hover:bg-muted transition-colors
+        `}
+            >
+              <TableCell className="font-medium">{req.material_name}</TableCell>
 
-              <TableCell>{req.quantity}</TableCell>
+              <TableCell className="text-right">{req.quantity}</TableCell>
 
               <TableCell>{req.unit}</TableCell>
 
@@ -91,7 +107,7 @@ export default function MaterialRequests() {
                 <PriorityBadge priority={req.priority} />
               </TableCell>
 
-              <TableCell>
+              <TableCell className="text-muted-foreground">
                 {new Date(req.requested_at).toLocaleDateString()}
               </TableCell>
             </TableRow>
