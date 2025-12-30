@@ -12,6 +12,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
+// import { LogOut } from "lucide-react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -25,6 +26,7 @@ import {
 import { CreateMaterialRequestDialog } from "@/components/CreateMaterialRequestDialog";
 import { Search, Package, Download, RefreshCw } from "lucide-react";
 import { CSVLink } from "react-csv";
+import { useNavigate } from "react-router-dom";
 function StatusBadge({ status }: { status: string }) {
   const styles: Record<string, string> = {
     pending: "bg-amber-100 text-amber-800 border-amber-300 shadow-sm",
@@ -73,6 +75,7 @@ function getActions(status: string) {
 }
 
 export default function MaterialRequests() {
+  const navigate = useNavigate();
   const { data, isLoading, error, mutate } = useMaterialRequests();
   const [open, setOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -155,7 +158,18 @@ export default function MaterialRequests() {
     );
   }
 
-  if (!data || data.length === 0) {
+  const handleLogout = async () => {
+    const toastId = toast.loading("Logging out...");
+
+    try {
+      await supabase.auth.signOut();
+      toast.success("Logged out successfully", { id: toastId });
+      navigate("/login");
+    } catch (error) {
+      toast.error("Failed to logout", { id: toastId });
+    }
+  };
+if (!data || data.length === 0) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 p-8">
         <div className="max-w-7xl mx-auto">
@@ -168,10 +182,34 @@ export default function MaterialRequests() {
             <h3 className="text-xl font-semibold text-slate-900 mb-2">
               No material requests yet
             </h3>
-            <p className="text-slate-500">
+            <p className="text-slate-500 mb-6">
               New requests will appear here once created
             </p>
+            <div className="flex justify-center gap-3">
+              <button
+                onClick={() => setOpen(true)}
+                className="bg-green-500 hover:bg-green-600 text-white px-6 py-2.5 rounded-lg font-semibold transition-colors duration-200 shadow-sm"
+              >
+                Create New Request
+              </button>
+              
+              <button
+                onClick={handleLogout}
+                className="flex items-center gap-2 px-6 py-2.5 bg-red-500 hover:bg-red-600 transition-colors text-white font-semibold rounded-lg shadow-sm"
+              >
+                Logout
+              </button>
+            </div>
           </div>
+          {open && (
+          <CreateMaterialRequestDialog
+            open={open}
+            onClose={() => {
+              setOpen(false);
+              mutate();
+            }}
+          />
+        )}
         </div>
       </div>
     );
@@ -236,6 +274,12 @@ export default function MaterialRequests() {
                 <Download className="w-4 h-4" />
                 Export
               </CSVLink>
+              <button
+                onClick={handleLogout}
+                className="flex items-center gap-2 px-4 py-2.5 bg-red-500 hover:bg-red-600 transition-colors text-white font-medium rounded-lg shadow-sm"
+              >
+                Logout
+              </button>
             </div>
           </div>
 
