@@ -22,9 +22,9 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
+import { CreateMaterialRequestDialog } from "@/components/CreateMaterialRequestDialog";
 import { Search, Package, Download, RefreshCw } from "lucide-react";
 import { CSVLink } from "react-csv";
-
 function StatusBadge({ status }: { status: string }) {
   const styles: Record<string, string> = {
     pending: "bg-amber-100 text-amber-800 border-amber-300 shadow-sm",
@@ -74,6 +74,7 @@ function getActions(status: string) {
 
 export default function MaterialRequests() {
   const { data, isLoading, error, mutate } = useMaterialRequests();
+  const [open, setOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [confirmDialog, setConfirmDialog] = useState<{
     open: boolean;
@@ -212,7 +213,6 @@ export default function MaterialRequests() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/20 to-slate-100 p-8">
       <div className="max-w-7xl mx-auto">
-      
         <div className="mb-8">
           <div className="flex items-center justify-between mb-6">
             <div>
@@ -221,6 +221,12 @@ export default function MaterialRequests() {
               </h1>
             </div>
             <div className="flex gap-3">
+              <button
+                onClick={() => setOpen(true)}
+                className="bg-green-400 hover:bg-green-600  text-white px-4 py-2 rounded-lg font-semibold transition-colors duration-200"
+              >
+                Create New Request
+              </button>
               <CSVLink
                 data={csvData}
                 headers={csvHeaders}
@@ -457,6 +463,16 @@ export default function MaterialRequests() {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
+
+      {open && (
+        <CreateMaterialRequestDialog
+          open={open}
+          onClose={() => {
+            setOpen(false);
+            mutate();
+          }}
+        />
+      )}
     </div>
   );
 }

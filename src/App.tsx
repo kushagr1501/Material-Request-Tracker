@@ -21,6 +21,7 @@ export default function App() {
         element={user ? <MaterialRequests /> : <Navigate to="/login" />}
       />
       
+      
       <Route path="*" element={<Navigate to="/material-requests" />} />
     </Routes>
   );
