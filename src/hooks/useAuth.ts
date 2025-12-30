@@ -12,9 +12,17 @@ export function useAuth() {
       setLoading(false);
     });
 
+
+    //for my understanding when auth state changes ,supbase call all the registered callbacks and one of them is this
+    
     supabase.auth.onAuthStateChange(
       (_event, session) => {
-        setUser(session?.user ?? null);
+        if(session === null){
+          setUser(null);
+          return;
+        }
+        setUser(session.user);
+    
       }
     );
 
