@@ -113,15 +113,15 @@ export default function Auth() {
               <div className="space-y-2 mb-3">
                 <div className="flex items-start gap-2">
                   <span className="text-xs text-gray-500 font-medium min-w-[60px]">EMAIL:</span>
-                  <span className="text-xs font-mono text-gray-700 break-all">companyb@example.com</span>
+                  <span className="text-xs font-mono text-gray-700 break-all">test2@gmail.com</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <span className="text-xs text-gray-500 font-medium min-w-[60px]">PASSWORD:</span>
-                  <span className="text-xs font-mono text-gray-700">password456</span>
+                  <span className="text-xs font-mono text-gray-700">test2</span>
                 </div>
               </div>
               <button
-                onClick={() => handleDemoLogin("companyb@example.com", "password456")}
+                onClick={() => handleDemoLogin("test2@gmail.com", "test2")}
                 className="w-full text-sm bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-all font-medium shadow-sm hover:shadow"
               >
                 Use Company B
