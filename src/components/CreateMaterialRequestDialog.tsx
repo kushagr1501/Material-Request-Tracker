@@ -185,7 +185,7 @@ export function CreateMaterialRequestDialog({ open, onClose }: Props) {
               Priority Level
             </Label>
             <Select
-              onValueChange={(v) => form.setValue("priority", v as string)}
+             onValueChange={(v) => form.setValue("priority", v as "low" | "medium" | "high" | "urgent")}
               defaultValue="medium"
             >
               <SelectTrigger className="h-11 border-slate-300 focus:border-blue-500 focus:ring-blue-500">
