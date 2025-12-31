@@ -1,6 +1,6 @@
 # Material Request Tracker
 
-A simple and secure material request tracking application built for construction and infrastructure teams(Bauai).  
+A simple and secure material request tracking application built for construction and infrastructure teams  
 The project demonstrates clean frontend architecture, Supabase integration, proper data security using Row Level Security (RLS), and thoughtful UX decisions.
 
 🔗 **Live Demo**  
