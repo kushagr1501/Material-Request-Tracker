@@ -146,38 +146,32 @@ Company B
 Email: test2@gmail.com
 Password: test2
 ```
+##  Approach & Design Decisions
 
-### Approach & Design Decisions
+- Supabase Row Level Security (RLS) is used to enforce security at the database level
+- React Query manages server state and avoids manual loading logic
+- React Hook Form + Zod provide predictable and scalable form validation
+- Dialog-based creation keeps users in context without unnecessary navigation
+- AI is used as a supportive tool rather than core business logic
 
-Supabase RLS is used to enforce security at the database level
+---
 
-React Query manages server state and avoids manual loading logic
+##  Deployment Notes
 
-Forms use React Hook Form and Zod for predictable validation
+- The application is deployed on Vercel
+- SPA routing is handled using a rewrite rule so direct URL refreshes work correctly
+- Supabase is fully managed and requires no backend deployment
 
-Dialog-based creation keeps users in context
+---
 
-AI is used as a supportive tool rather than core logic
+##  What This Project Demonstrates
 
-Deployment Notes
+- Clean React component structure
+- Proper use of hooks and server state management
+- Secure Supabase integration using Row Level Security (RLS)
+- Thoughtful UI/UX decisions and edge-case handling
+- Practical AI usage without overengineering
 
-The application is deployed on Vercel
-
-SPA routing is handled using a rewrite rule so direct URL refreshes work correctly
-
-Supabase is fully managed and requires no backend deployment
-
-What This Project Demonstrates
-
-Clean React component structure
-
-Proper use of hooks and server state management
-
-Secure Supabase integration with RLS
-
-Thoughtful UI/UX and edge case handling
-
-Practical AI usage without overengineering
 
 
 
