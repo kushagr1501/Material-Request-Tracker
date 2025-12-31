@@ -169,7 +169,7 @@ export default function MaterialRequests() {
       toast.error("Failed to logout", { id: toastId });
     }
   };
-if (!data || data.length === 0) {
+  if (!data || data.length === 0) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 p-8">
         <div className="max-w-7xl mx-auto">
@@ -192,7 +192,7 @@ if (!data || data.length === 0) {
               >
                 Create New Request
               </button>
-              
+
               <button
                 onClick={handleLogout}
                 className="flex items-center gap-2 px-6 py-2.5 bg-red-500 hover:bg-red-600 transition-colors text-white font-semibold rounded-lg shadow-sm"
@@ -202,14 +202,14 @@ if (!data || data.length === 0) {
             </div>
           </div>
           {open && (
-          <CreateMaterialRequestDialog
-            open={open}
-            onClose={() => {
-              setOpen(false);
-              mutate();
-            }}
-          />
-        )}
+            <CreateMaterialRequestDialog
+              open={open}
+              onClose={() => {
+                setOpen(false);
+                mutate();
+              }}
+            />
+          )}
         </div>
       </div>
     );
@@ -252,16 +252,16 @@ if (!data || data.length === 0) {
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/20 to-slate-100 p-8">
       <div className="max-w-7xl mx-auto">
         <div className="mb-8">
-          <div className="flex items-center justify-between mb-6">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 gap-4">
             <div>
               <h1 className="text-4xl font-bold text-slate-900 mb-2 tracking-tight">
                 Material Requests
               </h1>
             </div>
-            <div className="flex gap-3">
+            <div className="flex flex-wrap gap-3 w-full sm:w-auto">
               <button
                 onClick={() => setOpen(true)}
-                className="bg-green-400 hover:bg-green-600  text-white px-4 py-2 rounded-lg font-semibold transition-colors duration-200"
+                className="flex-1 sm:flex-none bg-green-400 hover:bg-green-600 text-white px-4 py-2 rounded-lg font-semibold transition-colors duration-200"
               >
                 Create New Request
               </button>
@@ -269,21 +269,21 @@ if (!data || data.length === 0) {
                 data={csvData}
                 headers={csvHeaders}
                 filename={filename}
-                className="flex items-center gap-2 px-4 py-2.5 bg-white border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors text-slate-700 font-medium shadow-sm"
+                className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2.5 bg-white border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors text-slate-700 font-medium shadow-sm"
               >
                 <Download className="w-4 h-4" />
                 Export
               </CSVLink>
               <button
                 onClick={handleLogout}
-                className="flex items-center gap-2 px-4 py-2.5 bg-red-500 hover:bg-red-600 transition-colors text-white font-medium rounded-lg shadow-sm"
+                className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2.5 bg-red-500 hover:bg-red-600 transition-colors text-white font-medium rounded-lg shadow-sm"
               >
                 Logout
               </button>
             </div>
           </div>
 
-          <div className="grid grid-cols-5 gap-4 mb-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-6">
             <div className="bg-white rounded-xl p-5 border border-slate-200 shadow-sm">
               <div className="text-slate-600 text-sm font-medium mb-1">
                 Total Requests
