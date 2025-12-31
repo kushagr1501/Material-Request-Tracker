@@ -84,7 +84,10 @@ VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
 
 ###To run 
 npm run dev
-Database Setup (Supabase)
+
+
+### Database Setup (Supabase)
+```bash 
 Table: material_requests
 create table material_requests (
   id uuid primary key default gen_random_uuid(),
@@ -98,10 +101,12 @@ create table material_requests (
   company_id uuid not null,
   requested_by uuid references auth.users(id)
 );
-
+```
+```bash
 Enable Row Level Security
 alter table material_requests enable row level security;
-
+```
+```bash 
 RLS Policies
 Select policy
 create policy "Users can view their company requests"
@@ -126,9 +131,11 @@ for update
 using (
   company_id = (auth.jwt() -> 'user_metadata' ->> 'company_id')::uuid
 );
+```
 
-Demo Accounts
 
+### Demo Accounts
+```
 Use the following accounts to test multi-company isolation:
 
 Company A
@@ -138,8 +145,9 @@ Password: password123
 Company B
 Email: test2@gmail.com
 Password: test2
+```
 
-Approach & Design Decisions
+### Approach & Design Decisions
 
 Supabase RLS is used to enforce security at the database level
 
