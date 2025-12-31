@@ -26,7 +26,7 @@ import {
 import { supabase } from "@/lib/supbase";
 import toast from "react-hot-toast";
 import { Package, Hash, Ruler, AlertCircle, FileText } from "lucide-react";
-import AIChatAssistant from "./AIChatAssistant .tsx";
+
 
 interface Props {
   open: boolean;
