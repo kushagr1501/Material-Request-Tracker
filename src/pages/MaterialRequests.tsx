@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 // import { LogOut } from "lucide-react";
+import AIChatAssistant from "@/components/AIChatAssistant .tsx";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -78,6 +79,7 @@ export default function MaterialRequests() {
   const navigate = useNavigate();
   const { data, isLoading, error, mutate } = useMaterialRequests();
   const [open, setOpen] = useState(false);
+
   const [searchQuery, setSearchQuery] = useState("");
   const [confirmDialog, setConfirmDialog] = useState<{
     open: boolean;
@@ -280,6 +282,8 @@ export default function MaterialRequests() {
               >
                 Logout
               </button>
+
+              {<AIChatAssistant/>}
             </div>
           </div>
 

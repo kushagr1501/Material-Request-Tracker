@@ -26,6 +26,7 @@ import {
 import { supabase } from "@/lib/supbase";
 import toast from "react-hot-toast";
 import { Package, Hash, Ruler, AlertCircle, FileText } from "lucide-react";
+import AIChatAssistant from "./AIChatAssistant .tsx";
 
 interface Props {
   open: boolean;
@@ -84,6 +85,7 @@ export function CreateMaterialRequestDialog({ open, onClose }: Props) {
           max-h-[90vh] overflow-y-auto
         "
       >
+        
         <DialogHeader className="space-y-3 pb-4 border-b">
           <div className="flex flex-col sm:flex-row sm:items-center gap-3">
           
@@ -96,8 +98,9 @@ export function CreateMaterialRequestDialog({ open, onClose }: Props) {
               </DialogDescription>
             </div>
           </div>
+       
         </DialogHeader>
-
+     
         <div className="space-y-5 pt-4 pb-2">
           <div className="space-y-2">
             <Label className="flex items-center gap-2">
